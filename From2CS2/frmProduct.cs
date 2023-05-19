@@ -12,8 +12,8 @@ namespace From2CS2
 	public partial class frmProduct : Form
 	{
 		DBConnect cn = new DBConnect();
-		string[] strHead = { " ລະຫັດສິນຄ້າ ", "ບາໂຄດ", " ຊື່ສິນຄ້າ ", " ປະເພດສິນຄ້າ ", "ຈຳນວນ","ຮູບສິນຄ້າ" };
-		int[] col = { 100, 200,100,100,100,500};
+		string[] strHead = { " ລະຫັດສິນຄ້າ ", "ບາໂຄດ", " ຊື່ສິນຄ້າ ", " ປະເພດສິນຄ້າ ", "ຈຳນວນ", "ຫົວໜ່ວຍ", "ຮູບພາບ" };
+		int[] col = { 100, 200, 100, 100, 100, 500, 200 };
 		public frmProduct()
 		{
 			InitializeComponent();
@@ -38,9 +38,37 @@ namespace From2CS2
 		}
 		private void ShowData()
 		{
-			string sqlPro = "select * from tbproduct ";
-			cn.getData(sqlPro);
-			dgvProduct.DataSource = cn.dt;
+			try
+			{
+				string sqlPro = "select p.proid, p.probarcode, p.proname, c.catname, p.qty, u.unitname, p.pic " +
+					            "from tbproduct p " +
+					            "inner join tbcategory c on p.catid = c.catid " +
+					            "inner join tbunit u on p.unitid = u.unitid";
+
+				//string sqlPro = "select * from tbproduct ";
+				cn.getData(sqlPro);
+				dgvProduct.DataSource = cn.dt;
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+		}
+
+		
+		private void textBox2_TextChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void label3_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void label5_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 	
